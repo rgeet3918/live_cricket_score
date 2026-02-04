@@ -1,0 +1,101 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+*.g.dart
+*.freezed.dart
+*.gr.dart
+# Ignore .env files except root .env (template with empty keys - commit this)
+.env*
+!/.env
+.DS_Store
+*.cc
+*.cmake
+
+# macOS
+macos/Flutter/ephemeral/
+macos/.symlinks/
+macos/Pods/
+macos/build/
+macos/generated/
+macos/Podfile
+
+
+# Linux
+linux/flutter/ephemeral/
+linux/generated/
+linux/build/
+
+/.DS_Store
+
+/android/app/.cxx
+**/release_keystore*
+**/release_key*.properties*
+
+/ios/build
+# ignore files used for ci cd pipeline
+*_firebase_service_credentials.json
+google_play_service_account.json
+
+# ignore fastlane report file
+/ios/fastlane/report.xml
+android/fastlane/report.xml
+# ignore generated file during build process
+ios/Runner/GoogleService-Info.plist
+# ignore firebase config files
+ios/firebase/
+**/google-services.json
+
+# ignore firebase options files
+lib/firebase_options_*.dart
+
+# ignore firebase config files
+ios/firebase/GoogleService-Info-*.plist
+
+.DS_Store
+generated_plugin_registrant.h
+GeneratedPluginRegistrant.swift
+firebase.json
+.claude
