@@ -32,3 +32,9 @@ Runner/GeneratedPluginRegistrant.*
 !default.mode2v3
 !default.pbxuser
 !default.perspectivev3
+/vendor/
+/fastlane/appconnect_api_key.json
+
+fastlane/appconnect_api_key.json
+fastlane/AuthKey_28JJD5RA77.p8
+fastlane/AuthKey_6YJZU7477K.p8
