@@ -145,15 +145,12 @@ class CricketAdService {
     );
   }
 
-  /// Get native ad unit ID (Android & iOS)
+  /// Get native ad unit ID (Android & iOS). iOS: from Firebase Remote Config.
   static String _getNativeAdUnitId() {
     if (Platform.isAndroid) {
-      // Android native test ID for development
-      return 'ca-app-pub-3940256099942544/2247696110';
-    } else {
-      // iOS native test ID (AdX) for development
-      return 'ca-app-pub-3940256099942544/3986624511';
+      return 'ca-app-pub-3940256099942544/2247696110'; // Android test ID
     }
+    return FirebaseRemoteConfigService.iosAdUnitNative; // iOS: Remote Config
   }
 
   /// Get native ad widget (Android & iOS)
@@ -186,40 +183,28 @@ class CricketAdService {
     );
   }
 
-  /// Get banner ad unit ID based on platform
-  /// Android: Uses AdMob service (test ID for now)
-  /// iOS: Uses Firebase AdEx test ID
+  /// Get banner ad unit ID. Android: test ID. iOS: from Firebase Remote Config.
   static String _getBannerAdUnitId() {
     if (Platform.isAndroid) {
-      // Android: Use AdMob test ID (can be replaced with production ID from AdMobService)
       return 'ca-app-pub-3940256099942544/6300978111'; // Android Test ID
     }
-
-    // iOS: Use Firebase AdEx test ID
-    // For production, replace with actual Firebase AdEx ad unit ID
-    return 'ca-app-pub-3940256099942544/2934735716'; // iOS Test ID (Firebase AdEx test)
+    return FirebaseRemoteConfigService.iosAdUnitBanner; // iOS: Remote Config
   }
 
-  /// Get app-open ad unit ID (Test IDs - replace with production IDs for release)
-  /// Android: AdMob App Open test ID
-  /// iOS: App Open test ID (Note: iOS App Open Ads may not work on simulator - test on real device)
+  /// Get app-open ad unit ID. Android: test ID. iOS: from Firebase Remote Config.
   static String _getAppOpenAdUnitId() {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3940256099942544/9257395921'; // Android App Open Test ID
     }
-    // iOS App Open Ad Test ID (Google's official test ID)
-    // IMPORTANT: iOS App Open Ads may not display on simulator - test on real iOS device
-    return 'ca-app-pub-3940256099942544/5575463023'; // iOS App Open Test ID (correct format)
+    return FirebaseRemoteConfigService.iosAdUnitAppOpen; // iOS: Remote Config
   }
 
-  /// Get interstitial ad unit ID
-  /// Android: AdMob test ID
-  /// iOS: Firebase AdEx test ID
+  /// Get interstitial ad unit ID. Android: test ID. iOS: from Firebase Remote Config.
   static String _getInterstitialAdUnitId() {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3940256099942544/1033173712'; // Android Test ID
     }
-    return 'ca-app-pub-3940256099942544/4411468910'; // iOS Test ID (Firebase AdEx test)
+    return FirebaseRemoteConfigService.iosAdUnitInterstitial; // iOS: Remote Config
   }
 
   /// Load banner ad
@@ -241,6 +226,11 @@ class CricketAdService {
           },
           onAdFailedToLoad: (ad, error) {
             debugPrint('❌ Banner ad failed to load: ${error.message}');
+            if (Platform.isIOS && error.message.contains('No ad to show')) {
+              debugPrint('⚠️ iOS: "No ad to show" is normal for newly approved ad units');
+              debugPrint('⚠️ iOS: Ad units can take 24-72 hours to start serving ads');
+              debugPrint('⚠️ iOS: This is expected - ads will work once inventory is ready');
+            }
             ad.dispose();
           },
         ),
